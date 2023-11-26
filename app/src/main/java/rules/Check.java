@@ -25,6 +25,7 @@ public class Check {
     public boolean pieceIsMenacingPos(Position currentPos, Position newPos, Board board, Color color){
         Piece piece = board.getPiece(currentPos);
         if(!pieceIsOfColor(piece, color) && piece != null){
+            if(pieceCanAttackPos(currentPos, newPos, board)){System.out.println("King is menaced by: " + board.getPiece(currentPos));}
             return pieceCanAttackPos(currentPos, newPos, board);
         }
         return false;
@@ -49,7 +50,7 @@ public class Check {
     private boolean pieceCanAttackPos(Position piecePos, Position targetPos, Board board) {
         Piece piece = board.getPiece(piecePos);
         //suppressStandardOutput(); // If a system.out.println is called it won't appear on the console.
-        boolean result = new Movement().isValid(piece.getMovementRules(), piece.getRestrictionRules(), piecePos, targetPos, board);
+        boolean result = new MovementValidator().isValid(piece.getMovementRules(), piece.getRestrictionRules(), piecePos, targetPos, board);// NO ESTÁ TENIENDO EN CUENTA LOS GAME RULES??
         /*restoreStandardOutput(); // any system.out.println can now appear.*/
         return result;
     }

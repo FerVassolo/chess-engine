@@ -1,6 +1,7 @@
 package game;
 
 import rules.MovementRule;
+import rules.PromotionRule;
 import rules.RestrictionRule;
 import rules.SpecialRule;
 
@@ -13,6 +14,7 @@ public class Piece {
     private MovementRule[] movementRules;
     private RestrictionRule[] restrictionRules;
     private SpecialRule[] specialRules;
+    private PromotionRule[] promotionRules;
 
 
     public Piece(int id, PieceName name, String nameAbbreviation, Color color, MovementRule[] movementRules, RestrictionRule[] restrictionRules){
@@ -23,6 +25,7 @@ public class Piece {
         this.movementRules = movementRules;
         this.restrictionRules = restrictionRules;
         this.specialRules = new SpecialRule[]{};
+        this.promotionRules = new PromotionRule[]{};
     }
 
     public Piece(int id, PieceName name, String nameAbbreviation, Color color, MovementRule[] movementRules, RestrictionRule[] restrictionRules, SpecialRule[] specialRules){
@@ -33,6 +36,17 @@ public class Piece {
         this.movementRules = movementRules;
         this.restrictionRules = restrictionRules;
         this.specialRules = specialRules;
+        this.promotionRules = new PromotionRule[]{};
+    }
+    public Piece(int id, PieceName name, String nameAbbreviation, Color color, MovementRule[] movementRules, RestrictionRule[] restrictionRules, SpecialRule[] specialRules, PromotionRule[] promotionRules){
+        this.id = id;
+        this.nameAbbreviation = abbreviation(nameAbbreviation, color);
+        this.color = color;
+        this.name = name;
+        this.movementRules = movementRules;
+        this.restrictionRules = restrictionRules;
+        this.specialRules = specialRules;
+        this.promotionRules = promotionRules;
     }
     public Color getColor() {
         return color;
@@ -81,8 +95,13 @@ public class Piece {
                 color == otherPiece.color;
     }
 
+    public PromotionRule[] getPromotionRules() {
+        return promotionRules;
+    }
 
-
+    public int getId() {
+        return id;
+    }
     /*Hago la class movement, agarro la primer movement rule y meto una iteración
     * Agarro las restrictions y gameRules y veo si puedo seguir y si es valido ese move*/
 }

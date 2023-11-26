@@ -21,8 +21,8 @@ public class DiagonalMaxQuantityRule implements RestrictionRule{
     }
 
     @Override
-    public void printErrorMessage() {
-        System.out.println("Piece can only move up to " + maxQty + " diagonal squares");
+    public String errorMessage() {
+        return "Piece can only move up to " + maxQty + " diagonal squares";
     }
 
     public boolean isDiagonal(Position pieceOriginalPos, Position pieceNewPos){

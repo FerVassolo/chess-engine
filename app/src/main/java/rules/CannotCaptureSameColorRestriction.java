@@ -16,7 +16,7 @@ public class CannotCaptureSameColorRestriction implements RestrictionRule{
     }
 
     @Override
-    public void printErrorMessage() {
-        System.out.println("A Piece cannot capture a same color piece");
+    public String errorMessage() {
+        return "A Piece cannot capture a same color piece";
     }
 }

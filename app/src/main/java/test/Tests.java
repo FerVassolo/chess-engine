@@ -49,7 +49,7 @@ public class Tests {
 
     @Test
     public void testIfInvalidMovementIsValidatedWithBlack(){
-        boolean isValid = new Movement().validateMovement(game, game.getBoard(), new Position(3, 1), new Position(2, 1));
+        boolean isValid = new MovementValidator().validateMovement(game, game.getBoard(), new Position(3, 1), new Position(2, 1));
         assertFalse(isValid);
     }
 
@@ -58,7 +58,7 @@ public class Tests {
         Board whiteMoved = new Movement().makeMove(game, game.getBoard(), new Position(1, 1), new Position(2, 1));
         Game newGame = new Game(gameRules, endGameRules, players, whiteMoved, new Time(0));
         newGame.passTurn();
-        boolean isValid = new Movement().validateMovement(newGame, whiteMoved, new Position(6, 1), new Position(5, 1));
+        boolean isValid = new MovementValidator().validateMovement(newGame, whiteMoved, new Position(6, 1), new Position(5, 1));
         assertTrue(isValid);
     }
 

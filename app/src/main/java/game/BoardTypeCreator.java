@@ -65,15 +65,15 @@ public class BoardTypeCreator {
     }
     private Board putKingsOnNormalBoard(Board board, PieceFactory pieceFactory, int id){
         Map<Position, Piece> newMap = board.getPositions();
-        newMap.put(board.getPosByAxis(0, 3), pieceFactory.createPiece(id, Color.WHITE));
-        newMap.put(board.getPosByAxis(7, 3), pieceFactory.createPiece(++id, Color.BLACK));
+        newMap.put(board.getPosByAxis(0, 4), pieceFactory.createPiece(id, Color.WHITE));
+        newMap.put(board.getPosByAxis(7, 4), pieceFactory.createPiece(++id, Color.BLACK));
         return new Board(newMap, 8, 8);
     }
 
     private Board putQueensOnNormalBoard(Board board, PieceFactory pieceFactory, int id){
         Map<Position, Piece> newMap = board.getPositions();
-        newMap.put(board.getPosByAxis(0, 4), pieceFactory.createPiece(id, Color.WHITE));
-        newMap.put(board.getPosByAxis(7, 4), pieceFactory.createPiece(++id, Color.BLACK));
+        newMap.put(board.getPosByAxis(0, 3), pieceFactory.createPiece(id, Color.WHITE));
+        newMap.put(board.getPosByAxis(7, 3), pieceFactory.createPiece(++id, Color.BLACK));
         return new Board(newMap, 8, 8);
     }
 

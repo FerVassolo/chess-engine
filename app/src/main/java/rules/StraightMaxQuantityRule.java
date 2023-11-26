@@ -19,15 +19,15 @@ public class StraightMaxQuantityRule implements RestrictionRule{
         int verticalDistance = Math.abs(pieceNewPos.getRow() - pieceOriginalPos.getRow());
         int horizontalDistance = Math.abs(pieceNewPos.getCol() - pieceOriginalPos.getCol());
         if(verticalDistance > maxQty || horizontalDistance > maxQty){
-            System.out.println("The selected piece can only move " + maxQty + " squares"); // probably an issue with the double movement
+            //System.out.println("The selected piece can only move " + maxQty + " squares"); // probably an issue with the double movement
             return false;
         }
         return true;
     }
 
     @Override
-    public void printErrorMessage() {
-        System.out.println("The selected piece can only move " + maxQty + " squares");
+    public String errorMessage() {
+        return "The selected piece can only move " + maxQty + " squares";
     }
 
     public boolean isStraight(Position pieceOriginalPos, Position pieceNewPos){

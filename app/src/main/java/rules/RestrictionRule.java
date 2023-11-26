@@ -9,5 +9,5 @@ public interface RestrictionRule {
     /*If false, it is invalid, if true it is valid*/
     public boolean validateRule(Position pieceOriginalPos, Position pieceNewPos, Board board);
 
-    public void printErrorMessage();
+    public String errorMessage();
 }

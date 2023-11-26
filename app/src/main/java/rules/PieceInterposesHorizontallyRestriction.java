@@ -29,8 +29,8 @@ public class PieceInterposesHorizontallyRestriction implements RestrictionRule{
     }
 
     @Override
-    public void printErrorMessage() {
-        System.out.println("There are pieces horizontally interposing the movement");
+    public String errorMessage() {
+        return "There are pieces horizontally interposing the movement";
     }
 
     public Map<Position, Piece> getAllPiecesInRow(Position pieceNewPos, Board board){

@@ -20,7 +20,8 @@ public class CannotMoveIfInCheck implements RestrictionRule{
     }
 
     @Override
-    public void printErrorMessage() {
+    public String errorMessage() {
+        return "Cannot leave your king on check";
     }
 
 }

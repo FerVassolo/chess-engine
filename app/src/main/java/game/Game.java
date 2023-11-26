@@ -35,6 +35,7 @@ public class Game {
         this.board = game.getBoard();
         this.gameClock = getGameClock();
         this.endGameRules = game.getEndGameRules();
+        this.turn = game.getTurn();
     }
 
     public EndGameRule[] getEndGameRules() {
@@ -98,11 +99,15 @@ public class Game {
         historyOfBoards.add(newBoard);
     }
 
-
+    public Board getLastBoard(){return historyOfBoards.get(historyOfBoards.size()-1);}
     public Player getCurrentPlayer(){
         return players[turn];
     }
     public ArrayList<Board> getHistoryOfBoards() {
         return historyOfBoards;
+    }
+
+    public int getTurn(){
+        return turn;
     }
 }

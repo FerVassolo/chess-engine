@@ -25,8 +25,8 @@ public class DiagonalMustCaptureRule implements RestrictionRule{
     }
 
     @Override
-    public void printErrorMessage() {
-        System.out.println("Diagonal movement must capture");
+    public String errorMessage() {
+        return "Diagonal movement must capture";
     }
 
     public boolean isDiagonal(Position pieceOriginalPos, Position pieceNewPos){

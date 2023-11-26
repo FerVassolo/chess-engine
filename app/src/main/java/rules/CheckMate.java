@@ -31,19 +31,23 @@ public class CheckMate implements EndGameRule{
         Position kingPos = check.getKingPos(board, currentColor);
         if(isNotInCheck(board, currentColor)){
             check.restoreStandardOutput();
+            //System.out.println("There is not Check");
             return true;
         }
+        //System.out.println("Check");
 
         if(kingCanEscape(board, currentColor, game)){
             check.restoreStandardOutput();
+            //System.out.println("King can escape");
             return true;
         }
-
+        //System.out.println("King cannot escape");
         ArrayList<Position> attackingPieces = getAllAttackingPeaces(board, currentColor);
             // If I can defend 1 then its enough cause that means I can defend all.
             // If I cannot defend one then its checkmate eve though I can defend all else.
         if(canDefendPieceFromPiece(kingPos, attackingPieces.get(0), board, game)) {
             check.restoreStandardOutput();
+            //System.out.println("A piece can defend the king");
             return true;
         }
         else{
@@ -91,7 +95,7 @@ public class CheckMate implements EndGameRule{
     }
 
     public boolean isReachable(Board board, Game game,  Position currentPos, Position newPos){
-        return new Movement().validateMovement(game, board, currentPos, newPos);
+        return new MovementValidator().validateMovement(game, board, currentPos, newPos);
     }
 
     public boolean canDefendPieceFromPiece(Position defendedPos, Position attackingPos, Board board, Game game){
@@ -108,13 +112,12 @@ public class CheckMate implements EndGameRule{
 
     // This one is not working
     public boolean pieceCanCapturePiece(Position defendingPiece, Position attackingPiece, Board board, Game game){
-        return new Movement().validateMovement(game, board, defendingPiece, attackingPiece);
+        return new MovementValidator().validateMovement(game, board, defendingPiece, attackingPiece);
     }
 
     public boolean colorCanBlockPiece(Position defendingPos, Position attackingPiece, Board board, Game game){
         ArrayList<Position> possibleBlockingPositions = new Movement().getPieceAllPossibleMoves(attackingPiece, board, game);
         ArrayList<Position> allDefendingColorPieces = board.getAllPositionsOfColor(board.getPiece(defendingPos).getColor());
-        System.out.println(allDefendingColorPieces.size());
         for(Position pos : allDefendingColorPieces){
             if(pieceCanBlockPiece(pos, board, game, possibleBlockingPositions)) return true;
         }
@@ -125,7 +128,7 @@ public class CheckMate implements EndGameRule{
     public boolean pieceCanBlockPiece(Position defendingPos, Board board, Game game, ArrayList<Position> possibleBlockingPositions) {
 
         for(Position pos : possibleBlockingPositions){
-            if(new Movement().validateMovement(game, board, defendingPos, pos)){
+            if(new MovementValidator().validateMovement(game, board, defendingPos, pos)){
                 return true;
             }
         }

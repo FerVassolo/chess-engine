@@ -16,8 +16,8 @@ public class OnPassantCaptureRule implements RestrictionRule{
     }
 
     @Override
-    public void printErrorMessage() {
-
+    public String errorMessage() {
+        return "";
     }
 
     public boolean isDiagonal(Position pieceOriginalPos, Position pieceNewPos){

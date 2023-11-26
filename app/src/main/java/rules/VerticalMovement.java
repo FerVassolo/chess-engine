@@ -8,6 +8,6 @@ public class VerticalMovement implements MovementRule{
     public boolean validateMovement(Position currentPosition, Position newPosition) {
         int oldCol = currentPosition.getCol();
         int newCol = newPosition.getCol();
-        return oldCol - newCol == 0;
+        return oldCol - newCol == 0; //=0 --> true, !=0 false
     }
 }

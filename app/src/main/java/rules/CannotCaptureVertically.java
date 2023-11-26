@@ -21,7 +21,7 @@ public class CannotCaptureVertically implements RestrictionRule{
     }
 
     @Override
-    public void printErrorMessage() {
-        System.out.println("Pawn cannot move vertically if a piece of any color interposes");
+    public String errorMessage() {
+        return "Pawn cannot move vertically if a piece of any color interposes";
     }
 }

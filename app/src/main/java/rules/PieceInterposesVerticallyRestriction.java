@@ -36,8 +36,8 @@ public class PieceInterposesVerticallyRestriction implements RestrictionRule {
     }
 
     @Override
-    public void printErrorMessage() {
-        System.out.println("There are pieces vertically interposing the movement");
+    public String errorMessage() {
+        return "There are pieces vertically interposing the movement";
     }
 
     public boolean isVertical(Position pieceOriginalPos, Position pieceNewPos) {

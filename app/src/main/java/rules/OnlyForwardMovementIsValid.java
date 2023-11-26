@@ -33,8 +33,8 @@ public class OnlyForwardMovementIsValid implements RestrictionRule {
     }
 
     @Override
-    public void printErrorMessage() {
-        System.out.println("Movement must be forward");
+    public String errorMessage() {
+        return "Movement must be forward";
     }
 
 }

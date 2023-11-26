@@ -17,8 +17,8 @@ public class OutOfBoundsRestriction implements RestrictionRule{
     }
 
     @Override
-    public void printErrorMessage() {
-        System.out.println("Out of Bounds");
+    public String errorMessage() {
+        return "Out of Bounds";
     }
 
     public boolean posHasPositiveAxis(Position pos){

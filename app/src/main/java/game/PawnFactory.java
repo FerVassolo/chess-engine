@@ -17,7 +17,8 @@ public class PawnFactory implements PieceFactory{
         MovementRule[] movementRules = new MovementRule[]{new VerticalMovement(), new DiagonalMovement()};
         Piece piece = createPiece(id, color);
         SpecialRule[] specialRules = new SpecialRule[]{new PawnDoubleMovementSpecialRule(movementRules, piece.getRestrictionRules())};
-        return new Piece(id, PieceName.PAWN, "P", color, movementRules, piece.getRestrictionRules(), specialRules);
+        PromotionRule[] promotionRules = new PromotionRule[]{new PawnPromotion()};
+        return new Piece(id, PieceName.PAWN, "P", color, movementRules, piece.getRestrictionRules(), specialRules, promotionRules);
     }
 
 }

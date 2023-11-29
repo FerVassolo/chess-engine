@@ -1,4 +1,4 @@
-package chess.rules;
+package commons.rules;
 
 /**
  * cannot move if the new position leaves the player in check.

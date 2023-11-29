@@ -1,6 +1,6 @@
 package commons;
 
-import chess.rules.PromotionRule;
+import commons.rules.PromotionRule;
 
 import java.util.ArrayList;
 import java.util.HashMap;

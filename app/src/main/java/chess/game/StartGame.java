@@ -4,7 +4,7 @@ import commons.Board;
 import commons.Game;
 import commons.Movement;
 import commons.Position;
-import chess.rules.EndGameRule;
+import commons.rules.EndGameRule;
 
 import java.util.ArrayList;
 

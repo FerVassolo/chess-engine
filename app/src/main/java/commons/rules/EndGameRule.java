@@ -1,4 +1,4 @@
-package chess.rules;
+package commons.rules;
 
 import commons.Game;
 import commons.Board;

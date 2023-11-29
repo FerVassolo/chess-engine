@@ -1,11 +1,11 @@
 package chess.game;
 
-import chess.rules.*;
 import commons.Color;
 import commons.Piece;
 import commons.PieceFactory;
 import commons.PieceName;
-import chess.rules.*;
+import commons.rules.*;
+import commons.rules.*;
 
 public class PawnFactory implements PieceFactory {
 

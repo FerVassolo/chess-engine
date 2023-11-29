@@ -1,8 +1,8 @@
 package commons;
 
-import chess.rules.MovementRule;
-import chess.rules.RestrictionRule;
-import chess.rules.SpecialRule;
+import commons.rules.MovementRule;
+import commons.rules.RestrictionRule;
+import commons.rules.SpecialRule;
 
 public class MovementValidator {
 

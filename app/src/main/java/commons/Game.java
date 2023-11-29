@@ -1,7 +1,7 @@
 package commons;
 
-import chess.rules.EndGameRule;
-import chess.rules.RestrictionRule;
+import commons.rules.EndGameRule;
+import commons.rules.RestrictionRule;
 
 import java.sql.Time;
 import java.util.ArrayList;

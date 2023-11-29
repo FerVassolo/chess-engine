@@ -1,11 +1,10 @@
-package chess.rules;
+package commons.rules;
 
 import chess.game.QueenFactory;
 import commons.Board;
 import commons.Piece;
 import commons.PieceName;
 import commons.Position;
-import chess.game.*;
 
 import java.util.HashMap;
 import java.util.Map;

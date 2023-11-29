@@ -1,8 +1,8 @@
 package edu.austral.dissis.chess.gui
 
 import chess.game.BoardTypeCreator
-import chess.rules.*
 import commons.*
+import commons.rules.*
 import edu.austral.dissis.chess.gui.PlayerColor.BLACK
 import edu.austral.dissis.chess.gui.PlayerColor.WHITE
 import javafx.application.Application.launch

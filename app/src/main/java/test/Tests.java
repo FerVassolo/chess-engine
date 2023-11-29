@@ -5,10 +5,9 @@ import chess.game.BishopFactory;
 import chess.game.BoardTypeCreator;
 import chess.rules.*;
 import commons.*;
-import chess.game.*;
+import commons.rules.*;
 import org.junit.Before;
 import org.junit.Test;
-import chess.rules.*;
 
 import java.sql.Time;
 import java.util.ArrayList;

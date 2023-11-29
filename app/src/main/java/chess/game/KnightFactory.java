@@ -4,9 +4,9 @@ import commons.Color;
 import commons.Piece;
 import commons.PieceFactory;
 import commons.PieceName;
-import chess.rules.LMovement;
-import chess.rules.MovementRule;
-import chess.rules.RestrictionRule;
+import commons.rules.LMovement;
+import commons.rules.MovementRule;
+import commons.rules.RestrictionRule;
 
 public class KnightFactory implements PieceFactory {
     MovementRule[] movementRules = new MovementRule[]{new LMovement()};

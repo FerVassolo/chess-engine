@@ -4,10 +4,10 @@ import commons.Color;
 import commons.Piece;
 import commons.PieceFactory;
 import commons.PieceName;
-import chess.rules.DiagonalMovement;
-import chess.rules.MovementRule;
-import chess.rules.PieceInterposesDiagonallyRestriction;
-import chess.rules.RestrictionRule;
+import commons.rules.DiagonalMovement;
+import commons.rules.MovementRule;
+import commons.rules.PieceInterposesDiagonallyRestriction;
+import commons.rules.RestrictionRule;
 
 public class BishopFactory implements PieceFactory {
     MovementRule[] movementRules = new MovementRule[]{new DiagonalMovement()};

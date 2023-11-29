@@ -1,10 +1,14 @@
 package test;
 
 
-import game.*;
+import chess.game.BishopFactory;
+import chess.game.BoardTypeCreator;
+import chess.rules.*;
+import commons.*;
+import chess.game.*;
 import org.junit.Before;
 import org.junit.Test;
-import rules.*;
+import chess.rules.*;
 
 import java.sql.Time;
 import java.util.ArrayList;

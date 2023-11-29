@@ -1,10 +1,11 @@
 package edu.austral.dissis.chess.gui
 
+import chess.game.BoardTypeCreator
+import chess.rules.*
+import commons.*
 import edu.austral.dissis.chess.gui.PlayerColor.BLACK
 import edu.austral.dissis.chess.gui.PlayerColor.WHITE
-import game.*
 import javafx.application.Application.launch
-import rules.*
 import java.sql.Time
 
 
@@ -64,7 +65,11 @@ class SimpleGameEngine8x8 : GameEngine {
     private fun createNormalGame(): Game {
         val fer = Player("fer", 1, Time(0), Color.WHITE)
         val leo = Player("leo", 2, Time(0), Color.BLACK)
-        val gameRules = arrayOf(CannotCaptureSameColorRestriction(), OutOfBoundsRestriction(), CannotMoveIfInCheck())
+        val gameRules = arrayOf(
+            CannotCaptureSameColorRestriction(),
+            OutOfBoundsRestriction(),
+            CannotMoveIfInCheck()
+        )
         val endGameRules = arrayOf<EndGameRule>(CheckMate())
         val players = arrayOf(fer, leo)
         // Using the adapter you should not need to have the board created in the back
@@ -116,7 +121,7 @@ class SimpleGameEngine8x8 : GameEngine {
         }
 
         pieces = pieces.map {
-            if ((it.color == WHITE && it.position.row == 8) || it.color == BLACK && it.position.row == 1)
+            if (((it.color == WHITE && it.position.row == 8) || it.color == BLACK && it.position.row == 1) && it.pieceId == "pawn")
                 it.copy(pieceId = "queen")
             else
                 it
@@ -142,8 +147,8 @@ class ChessGameApplication : AbstractChessGameApplication() {
     override val imageResolver = CachedImageResolver(DefaultImageResolver())
 }
 
-fun kotlinPositionIntoJavaPosition(piecePos: Position):  game.Position{
-    return game.Position(piecePos.row - 1, piecePos.column - 1);
+fun kotlinPositionIntoJavaPosition(piecePos: Position): commons.Position {
+    return commons.Position(piecePos.row - 1, piecePos.column - 1);
 }
 
 fun gameHasEnded(game: Game, board: Board?): Boolean {

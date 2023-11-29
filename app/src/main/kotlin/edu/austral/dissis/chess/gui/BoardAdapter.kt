@@ -1,7 +1,7 @@
 /*
 class BoardAdapter {
 
-    fun convertEngineToUIBoard(engineBoard: Map<game.Position, Piece>): List<ChessPiece> {
+    fun convertEngineToUIBoard(engineBoard: Map<commons.Position, Piece>): List<ChessPiece> {
         val uiBoard = mutableListOf<ChessPiece>()
         for ((position, piece) in engineBoard) {
             val uiPosition = convertEngineToUIPosition(position)

@@ -1,7 +1,7 @@
 package commons.rules;
 
-import commons.Board;
-import commons.Position;
+import commons.game.Board;
+import commons.game.Position;
 
 import java.util.ArrayList;
 

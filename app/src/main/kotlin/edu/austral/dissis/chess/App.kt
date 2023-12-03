@@ -15,7 +15,7 @@ fun main() {
 }
 
 class ChessGameApplication : Application() {
-    private val gameEngine = SimpleGameEngine8x8()
+    private val gameEngine = Checkers8x8()
     private val imageResolver = CachedImageResolver(DefaultImageResolver())
 
     companion object {

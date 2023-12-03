@@ -1,6 +1,10 @@
 package commons.rules;
 
-import commons.*;
+import commons.game.PieceName;
+import commons.game.Board;
+import commons.game.Color;
+import commons.game.Piece;
+import commons.game.Position;
 
 import java.util.ArrayList;
 import java.util.Map;

@@ -1,6 +1,6 @@
 package commons.rules;
 
-import commons.Position;
+import commons.game.Position;
 
 public class LMovement implements MovementRule{
 
@@ -14,11 +14,18 @@ public class LMovement implements MovementRule{
         //System.out.println("Movement must be L-like"); // Cause Movement rules don't have messages.
         return false;
     }
+
+
     public int[] subs(Position currentPosition, Position newPosition){
         int[] currentPos = new int[]{currentPosition.getRow(), currentPosition.getCol()};
         int[] newPos = new int[]{newPosition.getRow(), newPosition.getCol()};
         int verticalSub = Math.abs(currentPos[0] - newPos[0]);
         int horizontalSub = Math.abs(currentPos[1] - newPos[1]);
         return new int[]{verticalSub, horizontalSub};
+    }
+    //todo if necessary.
+    @Override
+    public Position[] getPath(Position currentPosition, Position newPosition) {
+        return null;
     }
 }

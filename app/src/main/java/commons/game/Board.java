@@ -1,4 +1,4 @@
-package commons;
+package commons.game;
 
 import java.util.*;
 
@@ -131,8 +131,22 @@ public class Board {
     }
 
 
+
     public boolean pieceIsOfColor(Piece piece, Color color){
         if(piece == null) return false;
         return piece.getColor() == color;
     }
+
+    public List<Piece> getAllPieces() {
+        List<Piece> pieces = new ArrayList<>(positions.values());
+        // Remove null values from the list
+        pieces.removeIf(piece -> piece == null);
+        return pieces;
+    }
+    public List<Piece> getAllPiecesOfColor(Color color, Board board){
+        List<Piece> allPieces = board.getAllPieces();
+        allPieces.removeIf(piece -> piece.getColor() != color);
+        return allPieces;
+    }
+
 }

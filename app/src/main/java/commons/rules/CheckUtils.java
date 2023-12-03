@@ -1,10 +1,11 @@
 package commons.rules;
 
-import commons.*;
+import commons.game.PieceName;
+import commons.game.*;
 
 import java.io.PrintStream;
 
-public class Check {
+public class CheckUtils {
 
     private PrintStream originalOut;
 
@@ -13,7 +14,6 @@ public class Check {
 
         Position kingPos = getKingPos(board, color);
         for(Position pos : board.getPositionsMapKeys()) {
-
             if(pieceIsMenacingPos(pos, kingPos, board, color)){
                 System.out.println(color + " king is in check");
                 return false;

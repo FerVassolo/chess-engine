@@ -1,8 +1,8 @@
 package commons.rules;
 
-import commons.Position;
-import commons.Board;
-import commons.Piece;
+import commons.game.Position;
+import commons.game.Board;
+import commons.game.Piece;
 
 public class PieceInterposesDiagonallyRestriction implements RestrictionRule {
 

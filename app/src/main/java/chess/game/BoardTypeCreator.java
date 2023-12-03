@@ -1,6 +1,6 @@
 package chess.game;
 
-import commons.*;
+import commons.game.*;
 
 import java.util.Map;
 

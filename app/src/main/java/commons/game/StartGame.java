@@ -1,9 +1,9 @@
-package chess.game;
+package commons.game;
 
-import commons.Board;
-import commons.Game;
-import commons.Movement;
-import commons.Position;
+import commons.game.Board;
+import commons.game.Game;
+import commons.game.Movement;
+import commons.game.Position;
 import commons.rules.EndGameRule;
 
 import java.util.ArrayList;

@@ -1,9 +1,6 @@
-package commons;
+package commons.game;
 
-import commons.rules.MovementRule;
-import commons.rules.PromotionRule;
-import commons.rules.RestrictionRule;
-import commons.rules.SpecialRule;
+import commons.rules.*;
 
 
 public class Piece {
@@ -14,9 +11,11 @@ public class Piece {
     private MovementRule[] movementRules;
     private RestrictionRule[] restrictionRules;
     private SpecialRule[] specialRules;
-    private PromotionRule[] promotionRules;
+    private BoardDependantSpecialRule[] boardDependantSpecialRules;
+    private BoardHistoryDependantSpecialRule[] dependantSpecialRules;
 
 
+    //PREGUNTAR COMO HACER ESTO MEJOR
     public Piece(int id, PieceName name, String nameAbbreviation, Color color, MovementRule[] movementRules, RestrictionRule[] restrictionRules){
         this.id = id;
         this.nameAbbreviation = abbreviation(nameAbbreviation, color);
@@ -25,7 +24,8 @@ public class Piece {
         this.movementRules = movementRules;
         this.restrictionRules = restrictionRules;
         this.specialRules = new SpecialRule[]{};
-        this.promotionRules = new PromotionRule[]{};
+        this.boardDependantSpecialRules = new BoardDependantSpecialRule[]{};
+        this.dependantSpecialRules =new BoardHistoryDependantSpecialRule[]{};
     }
 
     public Piece(int id, PieceName name, String nameAbbreviation, Color color, MovementRule[] movementRules, RestrictionRule[] restrictionRules, SpecialRule[] specialRules){
@@ -36,9 +36,11 @@ public class Piece {
         this.movementRules = movementRules;
         this.restrictionRules = restrictionRules;
         this.specialRules = specialRules;
-        this.promotionRules = new PromotionRule[]{};
+        this.boardDependantSpecialRules = new BoardDependantSpecialRule[]{};
+        this.dependantSpecialRules = new BoardHistoryDependantSpecialRule[]{};
     }
-    public Piece(int id, PieceName name, String nameAbbreviation, Color color, MovementRule[] movementRules, RestrictionRule[] restrictionRules, SpecialRule[] specialRules, PromotionRule[] promotionRules){
+
+    public Piece(int id, PieceName name, String nameAbbreviation, Color color, MovementRule[] movementRules, RestrictionRule[] restrictionRules, SpecialRule[] specialRules, BoardDependantSpecialRule[] boardDependantSpecialRules){
         this.id = id;
         this.nameAbbreviation = abbreviation(nameAbbreviation, color);
         this.color = color;
@@ -46,8 +48,23 @@ public class Piece {
         this.movementRules = movementRules;
         this.restrictionRules = restrictionRules;
         this.specialRules = specialRules;
-        this.promotionRules = promotionRules;
+        this.boardDependantSpecialRules = boardDependantSpecialRules;
+        this.dependantSpecialRules = new BoardHistoryDependantSpecialRule[]{};
     }
+
+    public Piece(int id, PieceName name, String nameAbbreviation, Color color, MovementRule[] movementRules, RestrictionRule[] restrictionRules, BoardHistoryDependantSpecialRule[] dependantSpecialRules){
+        this.id = id;
+        this.nameAbbreviation = abbreviation(nameAbbreviation, color);
+        this.color = color;
+        this.name = name;
+        this.movementRules = movementRules;
+        this.restrictionRules = restrictionRules;
+        this.specialRules = new SpecialRule[]{};
+        this.boardDependantSpecialRules = new BoardDependantSpecialRule[]{};
+        this.dependantSpecialRules = dependantSpecialRules;
+    }
+
+
     public Color getColor() {
         return color;
     }
@@ -95,9 +112,11 @@ public class Piece {
                 color == otherPiece.color;
     }
 
-    public PromotionRule[] getPromotionRules() {
-        return promotionRules;
+    public BoardDependantSpecialRule[] getBoardDependantRules() {
+        return boardDependantSpecialRules;
     }
+
+    public BoardHistoryDependantSpecialRule[] getDependantSpecialRules(){return dependantSpecialRules;}
 
     public int getId() {
         return id;

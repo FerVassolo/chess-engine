@@ -1,4 +1,4 @@
-package commons;
+package commons.game;
 
 public enum PieceName {
     PAWN,
@@ -6,5 +6,9 @@ public enum PieceName {
     KNIGHT,
     BISHOP,
     KING,
-    QUEEN
+    QUEEN,
+
+
+    MAN,
+    CHECKERS_KING
 }

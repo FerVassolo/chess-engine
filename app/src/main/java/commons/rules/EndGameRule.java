@@ -1,7 +1,7 @@
 package commons.rules;
 
-import commons.Game;
-import commons.Board;
+import commons.game.Game;
+import commons.game.Board;
 
 public interface EndGameRule {
 

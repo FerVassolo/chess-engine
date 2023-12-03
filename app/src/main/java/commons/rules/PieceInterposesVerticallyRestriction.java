@@ -1,7 +1,7 @@
 package commons.rules;
 
-import commons.Position;
-import commons.Board;
+import commons.game.Position;
+import commons.game.Board;
 
 public class PieceInterposesVerticallyRestriction implements RestrictionRule {
 

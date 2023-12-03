@@ -3,8 +3,7 @@ package test;
 
 import chess.game.BishopFactory;
 import chess.game.BoardTypeCreator;
-import chess.rules.*;
-import commons.*;
+import commons.game.*;
 import commons.rules.*;
 import org.junit.Before;
 import org.junit.Test;

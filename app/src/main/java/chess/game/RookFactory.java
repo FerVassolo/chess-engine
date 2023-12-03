@@ -1,10 +1,9 @@
 package chess.game;
 
-import commons.Color;
-import commons.Piece;
-import commons.PieceFactory;
-import commons.PieceName;
-import commons.rules.*;
+import commons.game.Color;
+import commons.game.Piece;
+import commons.game.PieceFactory;
+import commons.game.PieceName;
 import commons.rules.*;
 
 public class RookFactory implements PieceFactory {

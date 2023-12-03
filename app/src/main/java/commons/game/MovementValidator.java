@@ -1,5 +1,6 @@
-package commons;
+package commons.game;
 
+import commons.rules.BoardHistoryDependantSpecialRule;
 import commons.rules.MovementRule;
 import commons.rules.RestrictionRule;
 import commons.rules.SpecialRule;
@@ -17,9 +18,13 @@ public class MovementValidator {
         RestrictionRule[] restrictionRules = appendRestrictionRules(game.getGameRules(), piece.getRestrictionRules());
         MovementRule[] movementRules = piece.getMovementRules();
         SpecialRule[] specialRules = piece.getSpecialRules();
+        BoardHistoryDependantSpecialRule[] dependantSpecialRules = piece.getDependantSpecialRules();
 
         if (!selectedPieceColorIsValid(piece, game.currentTurn()))
             return false;
+
+        if(validateHistoryDependantSpecialRules(currentPos, newPos, dependantSpecialRules, game))
+            return true;
 
         if(validateSpecialRules(currentPos, newPos, specialRules, movementRules, game, board))
             return true;
@@ -40,11 +45,18 @@ public class MovementValidator {
         return false;
     }
 
-
+    public boolean validateHistoryDependantSpecialRules(Position currentPos, Position newPos, BoardHistoryDependantSpecialRule[] specialRules, Game game){
+        for (BoardHistoryDependantSpecialRule sp : specialRules) {
+            if (sp.ruleIsActive(currentPos, newPos, game.getHistoryOfBoards())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public static boolean isValid(MovementRule[] movementRules, RestrictionRule[] restrictionRules, Position currentPos, Position newPos, Board board) {
         for (RestrictionRule resRule : restrictionRules) {
-            if (!resRule.validateRule(currentPos, newPos, board)) {
+            if (!resRule.validateRule(currentPos, newPos, board)) { // if false
                 return false;
             }
         }

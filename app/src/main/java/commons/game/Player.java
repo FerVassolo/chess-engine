@@ -1,6 +1,4 @@
-package commons;
-
-import commons.Color;
+package commons.game;
 
 import java.sql.Time;
 

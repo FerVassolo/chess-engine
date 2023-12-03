@@ -1,9 +1,9 @@
 package commons.rules;
 
-import commons.Position;
-import commons.Board;
-import commons.Piece;
-import commons.Color;
+import commons.game.Position;
+import commons.game.Board;
+import commons.game.Piece;
+import commons.game.Color;
 
 public class OnlyForwardMovementIsValid implements RestrictionRule {
 

@@ -1,4 +1,4 @@
-package commons;
+package commons.game;
 
 import commons.rules.EndGameRule;
 import commons.rules.RestrictionRule;
@@ -94,6 +94,7 @@ public class Game {
 
         return arrayList;
     }
+
 
     public void setHistoryOfBoards(Board newBoard){
         historyOfBoards.add(newBoard);

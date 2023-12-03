@@ -1,10 +1,9 @@
 package chess.game;
 
-import commons.Color;
-import commons.Piece;
-import commons.PieceFactory;
-import commons.PieceName;
-import commons.rules.*;
+import commons.game.Color;
+import commons.game.Piece;
+import commons.game.PieceFactory;
+import commons.game.PieceName;
 import commons.rules.*;
 
 public class PawnFactory implements PieceFactory {
@@ -22,7 +21,7 @@ public class PawnFactory implements PieceFactory {
         MovementRule[] movementRules = new MovementRule[]{new VerticalMovement(), new DiagonalMovement()};
         Piece piece = createPiece(id, color);
         SpecialRule[] specialRules = new SpecialRule[]{new PawnDoubleMovementSpecialRule(movementRules, piece.getRestrictionRules())};
-        PromotionRule[] promotionRules = new PromotionRule[]{new PawnPromotion()};
+        BoardDependantSpecialRule[] promotionRules = new BoardDependantSpecialRule[]{new PawnPromotion()};
         return new Piece(id, PieceName.PAWN, "P", color, movementRules, piece.getRestrictionRules(), specialRules, promotionRules);
     }
 

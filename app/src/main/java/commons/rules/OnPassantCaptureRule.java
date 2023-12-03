@@ -1,8 +1,8 @@
 package commons.rules;
 
-import commons.Position;
-import commons.Board;
-import commons.Color;
+import commons.game.Position;
+import commons.game.Board;
+import commons.game.Color;
 
 public class OnPassantCaptureRule implements RestrictionRule{
     @Override

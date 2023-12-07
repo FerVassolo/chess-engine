@@ -1,10 +1,20 @@
 package test;
 
 
-import chess.game.BishopFactory;
-import chess.game.BoardTypeCreator;
+import chess.factories.BishopFactory;
+import chess.factories.BoardTypeCreator;
+import commons.board.Board;
+import commons.board.Position;
 import commons.game.*;
-import commons.rules.*;
+import commons.movement.Movement;
+import commons.movement.MovementValidator;
+import commons.piece.Piece;
+import commons.rules.endgameRules.CheckMate;
+import commons.rules.endgameRules.EndGameRule;
+import commons.rules.restrictionRules.CannotCaptureSameColorRestriction;
+import commons.rules.restrictionRules.CannotMoveIfInCheck;
+import commons.rules.restrictionRules.OutOfBoundsRestriction;
+import commons.rules.restrictionRules.RestrictionRule;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -38,6 +48,7 @@ public class Tests {
         Board whiteMoved = new Movement().makeMove(game, game.getBoard(), new Position(3, 1), new Position(2, 1));
         assertEquals(game.getBoard(), whiteMoved);
     }
+
     /**
      * If the movement is invalid the board should remain the same.
      */

@@ -1,6 +1,10 @@
 package checkers.factories;
 
+import commons.board.Board;
+import commons.board.Position;
 import commons.game.*;
+import commons.piece.Piece;
+import commons.piece.PieceFactory;
 
 import java.util.Map;
 

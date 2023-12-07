@@ -3,11 +3,21 @@
  */
 package edu.austral.dissis.chess
 
+import chess.factories.BoardTypeCreator
+import commons.board.Board
+import commons.game.Color
+import commons.game.Game
+import commons.game.Player
+import commons.rules.endgameRules.EndGameRule
+import commons.rules.endgameRules.RunOutOfPieces
+import commons.rules.restrictionRules.CannotCaptureSameColorRestriction
+import commons.rules.restrictionRules.OutOfBoundsRestriction
 import edu.austral.dissis.chess.gui.*
 import javafx.application.Application
 import javafx.application.Application.launch
 import javafx.scene.Scene
 import javafx.stage.Stage
+import java.sql.Time
 
 
 fun main() {
@@ -15,7 +25,7 @@ fun main() {
 }
 
 class ChessGameApplication : Application() {
-    private val gameEngine = Checkers8x8()
+    private val gameEngine = GameEngineAdapter(createNormalCheckersGame())
     private val imageResolver = CachedImageResolver(DefaultImageResolver())
 
     companion object {
@@ -25,7 +35,7 @@ class ChessGameApplication : Application() {
     override fun start(primaryStage: Stage) {
         primaryStage.title = GameTitle
 
-        val root = GameView(gameEngine, imageResolver)
+        val root = createGameViewFrom(gameEngine, imageResolver)
         primaryStage.scene = Scene(root)
 
         primaryStage.show()

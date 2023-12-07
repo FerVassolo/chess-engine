@@ -1,7 +1,9 @@
 package commons.game;
 
-import commons.rules.EndGameRule;
-import commons.rules.RestrictionRule;
+import commons.board.Board;
+import commons.board.Position;
+import commons.rules.endgameRules.EndGameRule;
+import commons.rules.restrictionRules.RestrictionRule;
 
 import java.sql.Time;
 import java.util.ArrayList;
@@ -41,11 +43,9 @@ public class Game {
     public EndGameRule[] getEndGameRules() {
         return endGameRules;
     }
-
     public Time getGameClock() {
         return gameClock;
     }
-
     public void passTurn(){
         if(turn + 1>= players.length)
             turn = 0;
@@ -54,52 +54,18 @@ public class Game {
     public Player currentTurn(){
         return players[turn];
     }
-
     public Board getBoard() {
         return board;
     }
-
     public Player[] getPlayers() {
         return players;
     }
-
     public RestrictionRule[] getGameRules() {
         return gameRules;
     }
-
-    public ArrayList<Position> askForMovement(){
-        System.out.println();
-        System.out.println("It is " + players[turn].getName() + "'s turn");
-        System.out.println("Select a piece to move (row, col): ");
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Row: ");
-        int currentRow = scanner.nextInt();
-        System.out.print("Column: ");
-        int currentCol = scanner.nextInt();
-
-        System.out.println("New position (row, col): ");
-        System.out.print("Row: ");
-        int newRow = scanner.nextInt();
-        System.out.print("Column: ");
-        int newCol = scanner.nextInt();
-        System.out.println();
-
-        Position currentPos = new Position(currentRow, currentCol);
-        Position newPos = new Position(newRow, newCol);
-
-        ArrayList<Position> arrayList = new ArrayList<>();
-        arrayList.add(currentPos);
-        arrayList.add(newPos);
-
-        return arrayList;
-    }
-
-
     public void setHistoryOfBoards(Board newBoard){
         historyOfBoards.add(newBoard);
     }
-
     public Board getLastBoard(){return historyOfBoards.get(historyOfBoards.size()-1);}
     public Player getCurrentPlayer(){
         return players[turn];
@@ -107,8 +73,16 @@ public class Game {
     public ArrayList<Board> getHistoryOfBoards() {
         return historyOfBoards;
     }
-
     public int getTurn(){
         return turn;
+    }
+
+    public boolean gameHasEnded(Game game, Board board) {
+        for (EndGameRule rule : game.getEndGameRules()) {
+            if (!rule.checkEndRule(game, board)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

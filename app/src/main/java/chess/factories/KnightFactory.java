@@ -17,8 +17,5 @@ public class KnightFactory implements PieceFactory {
         return new Piece(id, PieceName.KNIGHT, "Kn", color, movementRules, restrictionRules);
     }
 
-    @Override
-    public Piece createPieceWithSpecialRules(int id, Color color) {
-        return null;
-    }
+
 }

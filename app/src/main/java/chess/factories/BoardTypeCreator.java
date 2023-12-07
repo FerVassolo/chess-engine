@@ -35,14 +35,14 @@ public class BoardTypeCreator {
             return board;
         }
         Map<Position, Piece> newMap = board.getPositions();
-        newMap.put(board.getPosByAxis(row, currentCol), pieceFactory.createPieceWithSpecialRules(id, color));
+        newMap.put(board.getPosByAxis(row, currentCol), pieceFactory.createPiece(id, color));
         Board newBoard = new Board(newMap, 8, 8);
         return fillEntireLineWithOnePiece(newBoard, pieceFactory, row, ++currentCol, ++id, color);
     }
 
     private Board putPieceAtPos(Board board, PieceFactory pieceFactory, int row, int col, int id, Color color){
         Map<Position, Piece> newMap = board.getPositions();
-        newMap.put(board.getPosByAxis(row, col), pieceFactory.createPieceWithSpecialRules(id, color));
+        newMap.put(board.getPosByAxis(row, col), pieceFactory.createPiece(id, color));
         return new Board(newMap, 8, 8);
     }
     private Board putKinghtsOnNormalBoard(Board board, PieceFactory pieceFactory, int id){

@@ -1,4 +1,4 @@
-package commons.rules.utils;
+package chess.rules.utils;
 
 import commons.board.Board;
 import commons.board.Position;
@@ -6,6 +6,7 @@ import commons.movement.MovementValidator;
 import commons.piece.Piece;
 import commons.piece.PieceName;
 import commons.game.*;
+import commons.rules.utils.NullOutputStream;
 
 import java.io.PrintStream;
 

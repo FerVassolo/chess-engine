@@ -17,8 +17,5 @@ public class BishopFactory implements PieceFactory {
         return new Piece(id, PieceName.BISHOP, "B", color, movementRules, restrictionRules);
     }
 
-    @Override
-    public Piece createPieceWithSpecialRules(int id, Color color) {
-        return null;
-    }
+
 }

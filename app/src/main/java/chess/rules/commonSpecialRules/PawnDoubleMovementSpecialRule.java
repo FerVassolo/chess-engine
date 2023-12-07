@@ -1,7 +1,8 @@
-package commons.rules.commonSpecialRules;
+package chess.rules.commonSpecialRules;
 
 import commons.board.Position;
 import commons.board.Board;
+import commons.rules.commonSpecialRules.SpecialRule;
 import commons.rules.restrictionRules.RestrictionRule;
 import commons.rules.restrictionRules.VerticalMaxQuantityRule;
 import commons.rules.movementRules.MovementRule;

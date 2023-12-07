@@ -1,8 +1,9 @@
-package commons.rules.boardDependantRules;
+package checkers.rules.boardDependant;
 
 import commons.board.Board;
 import commons.piece.Piece;
 import commons.board.Position;
+import commons.rules.boardDependantRules.BoardDependantSpecialRule;
 import commons.rules.movementRules.DiagonalMovement;
 
 import java.util.HashMap;

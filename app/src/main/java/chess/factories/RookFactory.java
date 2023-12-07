@@ -20,8 +20,5 @@ public class RookFactory implements PieceFactory {
         return new Piece(id, PieceName.ROOK, "R", color, movementRules, restrictionRules);
     }
 
-    @Override
-    public Piece createPieceWithSpecialRules(int id, Color color) {
-        return null;
-    }
+
 }

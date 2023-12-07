@@ -1,11 +1,12 @@
-package commons.rules.boardHistoryDependantRules;
+package chess.rules.boardHistoryDependant;
 
 import commons.board.Board;
 import commons.board.Position;
 import commons.game.*;
 import commons.piece.Piece;
 import commons.piece.PieceName;
-import commons.rules.utils.CheckUtils;
+import commons.rules.boardHistoryDependantRules.BoardHistoryDependantSpecialRule;
+import chess.rules.utils.CheckUtils;
 import commons.rules.movementRules.HorizontalMovement;
 import commons.rules.restrictionRules.PieceInterposesHorizontallyRestriction;
 

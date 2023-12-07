@@ -2,7 +2,9 @@ package commons.rules.movementRules;
 
 import commons.board.Position;
 
-public class VerticalMovement implements MovementRule {
+import java.io.Serializable;
+
+public class VerticalMovement implements MovementRule, Serializable {
 
     @Override
     public boolean validateMovement(Position currentPosition, Position newPosition) {

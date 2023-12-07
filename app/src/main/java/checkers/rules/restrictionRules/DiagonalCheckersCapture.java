@@ -1,14 +1,15 @@
-package commons.rules.restrictionRules;
+package checkers.rules.restrictionRules;
 
 import commons.board.Board;
 import commons.piece.Piece;
 import commons.board.Position;
 import commons.rules.movementRules.DiagonalMovement;
+import commons.rules.restrictionRules.RestrictionRule;
 
 // the amount of jumps is already taken care by DiagonalMaxQty
 // Actually it is checkers normal movement for all pieces.
 
-public class DiagonalCheckersCapture implements RestrictionRule{
+public class DiagonalCheckersCapture implements RestrictionRule {
 
     // to capture, no matter the distance, squares should be:
     // piece -> empty -> piece of other color -> empty -> piece of other color -> empty -> ...

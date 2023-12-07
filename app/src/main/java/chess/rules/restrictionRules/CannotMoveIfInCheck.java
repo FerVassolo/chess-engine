@@ -1,4 +1,4 @@
-package commons.rules.restrictionRules;
+package chess.rules.restrictionRules;
 
 /**
  * cannot move if the new position leaves the player in check.
@@ -8,9 +8,10 @@ import commons.board.Board;
 import commons.game.Color;
 import commons.movement.Movement;
 import commons.board.Position;
-import commons.rules.utils.CheckUtils;
+import commons.rules.restrictionRules.RestrictionRule;
+import chess.rules.utils.CheckUtils;
 
-public class CannotMoveIfInCheck implements RestrictionRule{
+public class CannotMoveIfInCheck implements RestrictionRule {
 
 
     // todo, see if this is correct...

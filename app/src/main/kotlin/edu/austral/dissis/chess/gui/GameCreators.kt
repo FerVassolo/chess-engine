@@ -5,12 +5,12 @@ import commons.board.Board
 import commons.game.Color
 import commons.game.Game
 import commons.game.Player
-import commons.rules.endgameRules.CheckMate
+import chess.rules.endgameRules.CheckMate
 import commons.rules.endgameRules.EndGameRule
 import commons.rules.endgameRules.RunOutOfPieces
 import commons.rules.restrictionRules.CannotCaptureSameColorRestriction
-import commons.rules.restrictionRules.CannotMoveIfInCheck
-import commons.rules.restrictionRules.CheckersCanCaptureMustCaptureRule
+import chess.rules.restrictionRules.CannotMoveIfInCheck
+import checkers.rules.restrictionRules.CheckersCanCaptureMustCaptureRule
 import commons.rules.restrictionRules.OutOfBoundsRestriction
 import java.sql.Time
 

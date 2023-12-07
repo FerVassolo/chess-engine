@@ -1,22 +1,24 @@
-package commons.rules.boardDependantRules;
+package checkers.rules.boardDependant;
 
-import chess.factories.QueenFactory;
+import checkers.factories.CheckersKingFactory;
 import commons.board.Board;
 import commons.piece.Piece;
 import commons.piece.PieceName;
 import commons.board.Position;
+import commons.rules.boardDependantRules.BoardDependantSpecialRule;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class PawnPromotion implements BoardDependantSpecialRule {
+public class ManPromotionRule implements BoardDependantSpecialRule {
 
-    QueenFactory queenFactory = new QueenFactory();
+    CheckersKingFactory kingFactory = new CheckersKingFactory();
 
+    // This is repeated code in many aspects... todo: make a PromotionUtils class
     @Override
     public boolean ruleIsActive(Position pieceOriginalPos, Position pieceNewPos, Board board) {
         Piece movedPiece = board.getPiece(pieceOriginalPos);
-        if(movedPiece.getName() != PieceName.PAWN){
+        if(movedPiece.getName() != PieceName.MAN){
             return false;
         }
         return pieceNewPos.getRow() == (board.getHeight()-1) || pieceNewPos.getRow() == 0;
@@ -27,9 +29,9 @@ public class PawnPromotion implements BoardDependantSpecialRule {
     public Board modifiedBoard(Position pieceOriginalPos, Position pieceNewPos, Board board) {
         Map<Position, Piece> newPosDisplay = new HashMap<>(board.getPositions()); // Create a copy
         Piece movedPiece = newPosDisplay.get(board.getPosByPos(pieceOriginalPos));
-        Piece queen = queenFactory.createPiece(movedPiece.getId(), movedPiece.getColor());
+        Piece king = kingFactory.createPiece(movedPiece.getId(), movedPiece.getColor());
         newPosDisplay.put(board.getPosByPos(pieceOriginalPos), null);
-        newPosDisplay.put(board.getPosByPos(pieceNewPos), queen);
+        newPosDisplay.put(board.getPosByPos(pieceNewPos), king);
         return new Board(newPosDisplay, board.getHeight(), board.getWidth());
     }
 }

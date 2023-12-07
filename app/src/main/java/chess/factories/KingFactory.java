@@ -5,7 +5,7 @@ import commons.game.Color;
 import commons.piece.Piece;
 import commons.piece.PieceFactory;
 import commons.rules.boardHistoryDependantRules.BoardHistoryDependantSpecialRule;
-import commons.rules.boardHistoryDependantRules.CastlingRule;
+import chess.rules.boardHistoryDependant.CastlingRule;
 import commons.rules.movementRules.DiagonalMovement;
 import commons.rules.movementRules.HorizontalMovement;
 import commons.rules.movementRules.MovementRule;
@@ -24,8 +24,4 @@ public class KingFactory implements PieceFactory {
         return new Piece(id, PieceName.KING, "K", color, movementRules, restrictionRules, modifyingSpecialRules);
     }
 
-    @Override
-    public Piece createPieceWithSpecialRules(int id, Color color) {
-        return null;
-    }
 }

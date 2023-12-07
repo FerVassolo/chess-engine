@@ -1,4 +1,4 @@
-package commons.rules.endgameRules;
+package chess.rules.endgameRules;
 
 import commons.board.Board;
 import commons.board.Position;
@@ -6,7 +6,8 @@ import commons.game.*;
 import commons.movement.Movement;
 import commons.movement.MovementValidator;
 import commons.piece.Piece;
-import commons.rules.utils.CheckUtils;
+import commons.rules.endgameRules.EndGameRule;
+import chess.rules.utils.CheckUtils;
 
 import java.util.ArrayList;
 

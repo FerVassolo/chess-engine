@@ -18,9 +18,4 @@ public class ArchbishopFactory implements PieceFactory {
         RestrictionRule[] restrictionRules = new RestrictionRule[]{new PieceInterposesDiagonallyRestriction()};
         return new Piece(id, PieceName.ARCHBISHOP, "Akn", color, movementRules, restrictionRules);
     }
-
-    @Override
-    public Piece createPieceWithSpecialRules(int id, Color color) {
-        return null;
-    }
 }

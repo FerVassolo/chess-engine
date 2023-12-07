@@ -1,15 +1,16 @@
-package commons.rules.restrictionRules;
+package checkers.rules.restrictionRules;
 
 import commons.board.Board;
 import commons.board.Position;
 import commons.movement.MovementValidator;
 import commons.piece.Piece;
+import commons.rules.restrictionRules.RestrictionRule;
 
 import java.util.ArrayList;
 import java.util.List;
 
 // If a player can eat but doesn't this rule won't let they
-public class CheckersCanCaptureMustCaptureRule implements RestrictionRule{
+public class CheckersCanCaptureMustCaptureRule implements RestrictionRule {
 
     //usar DiagonalCheckersCapture para validar cada pieza si puede comer.
 

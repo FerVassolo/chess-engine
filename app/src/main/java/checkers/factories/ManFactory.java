@@ -5,13 +5,13 @@ import commons.piece.Piece;
 import commons.piece.PieceFactory;
 import commons.piece.PieceName;
 import commons.rules.boardDependantRules.BoardDependantSpecialRule;
-import commons.rules.boardDependantRules.CheckersCapturingRule;
-import commons.rules.boardDependantRules.ManPromotionRule;
+import checkers.rules.boardDependant.CheckersCapturingRule;
+import checkers.rules.boardDependant.ManPromotionRule;
 import commons.rules.commonSpecialRules.SpecialRule;
 import commons.rules.movementRules.DiagonalMovement;
 import commons.rules.movementRules.MovementRule;
 import commons.rules.restrictionRules.CannotLandOnPiece;
-import commons.rules.restrictionRules.DiagonalCheckersCapture;
+import checkers.rules.restrictionRules.DiagonalCheckersCapture;
 import commons.rules.restrictionRules.OnlyForwardMovementIsValid;
 import commons.rules.restrictionRules.RestrictionRule;
 
@@ -26,8 +26,4 @@ public class ManFactory implements PieceFactory {
         return new Piece(id, PieceName.MAN, "M", color, movementRules, restrictionRules, new SpecialRule[]{}, boardDependantSpecialRules);
     }
 
-    @Override
-    public Piece createPieceWithSpecialRules(int id, Color color) {
-        return null;
-    }
 }

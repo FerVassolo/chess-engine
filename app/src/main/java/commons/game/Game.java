@@ -2,6 +2,12 @@ package commons.game;
 
 import commons.board.Board;
 import commons.board.Position;
+import commons.movement.Movement;
+import commons.movement.MovementValidator;
+import commons.result.EndgameResult;
+import commons.result.InvalidMoveResult;
+import commons.result.MoveResult;
+import commons.result.ValidMoveResult;
 import commons.rules.endgameRules.EndGameRule;
 import commons.rules.restrictionRules.RestrictionRule;
 
@@ -38,6 +44,46 @@ public class Game {
         this.gameClock = getGameClock();
         this.endGameRules = game.getEndGameRules();
         this.turn = game.getTurn();
+    }
+
+    public MoveResult move( Board board, Position originalPos, Position newPos){
+
+        if(gameHasEnded(this, board))
+            return new EndgameResult(currentTurn());
+
+        if(board.getPiece(originalPos) == null)
+            return new InvalidMoveResult("No piece in " + originalPos.getRow() + ", " + originalPos.getRow());
+        if(board.getPiece(originalPos).getColor() != currentTurn().getColor()){
+            return new InvalidMoveResult("Piece does not belong to the current player");
+        }
+        if(board.getPiece(newPos) != null && board.getPiece(newPos).getColor() == currentTurn().getColor()){
+            return new InvalidMoveResult("There is a piece in " +  newPos.getRow() + ", " + newPos.getRow());
+        }
+
+        Board newBoard = new Movement().makeMove(this, board, originalPos, newPos);
+        if (board.equals(newBoard)){
+            return new InvalidMoveResult(invalidationMessage(this, getLastBoard(), originalPos, newPos));
+        }
+        else{
+            this.passTurn();
+            this.setHistoryOfBoards(newBoard);
+            return new ValidMoveResult(this);
+        }
+    }
+
+    public String invalidationMessage(Game game, Board board, Position from, Position to) {
+        MovementValidator validator = new MovementValidator();
+        validator.validateMovement(game, board, from, to);
+        return validator.getError();
+    }
+
+    public boolean gameHasEnded(Game game, Board board){
+        for(EndGameRule rule : game.getEndGameRules()){
+            if(!rule.checkEndRule(game, board)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public EndGameRule[] getEndGameRules() {
@@ -77,12 +123,5 @@ public class Game {
         return turn;
     }
 
-    public boolean gameHasEnded(Game game, Board board) {
-        for (EndGameRule rule : game.getEndGameRules()) {
-            if (!rule.checkEndRule(game, board)) {
-                return true;
-            }
-        }
-        return false;
-    }
+
 }

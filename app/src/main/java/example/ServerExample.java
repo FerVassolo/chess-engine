@@ -14,7 +14,7 @@ public class ServerExample {
                 .withPort(8095)
                 .withConnectionListener(new MyServerConnectionListener())
                 .addMessageListener("hello", new TypeReference<>() {
-                }, new HelloListener()) // se suscribe al topico "hello". Este topico lo usa un client cuando se conecta.
+                }, new HelloListener())
                 .build();
 
         server.start();
@@ -24,7 +24,6 @@ public class ServerExample {
         try {
             while (true) {
                 Thread.sleep(1000);
-                // server manda al topico "ping" el mensaje "Are you there?". Cualquier cliente subscrito lo va a recibir.
                 server.broadcast(new Message<>("ping", "Are you there?"));
             }
         } catch (InterruptedException e) {

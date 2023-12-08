@@ -10,7 +10,6 @@ import javafx.stage.Stage
 
 fun main() {
     launch(GameApp::class.java)
-
 }
 
 class GameApp : Application() {

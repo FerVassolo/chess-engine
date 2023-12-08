@@ -1,4 +1,4 @@
-package example;
+package client.listeners;
 
 public record HelloPayload(String name) {
     @Override

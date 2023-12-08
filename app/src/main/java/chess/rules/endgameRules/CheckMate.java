@@ -58,7 +58,6 @@ public class CheckMate implements EndGameRule {
             return true;
         }
         else{
-            game.passTurn();
             checkUtils.restoreStandardOutput();
             //TODO: Mandar esto a messages as well, no printear así.
             System.out.println("CheckMate: " + game.getCurrentPlayer().getColor() + " wins!");

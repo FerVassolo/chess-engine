@@ -48,8 +48,10 @@ public class Game {
 
     public MoveResult move( Board board, Position originalPos, Position newPos){
 
-        if(gameHasEnded(this, board))
+        if(gameHasEnded(this, board)){
+            passTurn();
             return new EndgameResult(currentTurn());
+        }
 
         if(board.getPiece(originalPos) == null)
             return new InvalidMoveResult("No piece in " + originalPos.getRow() + ", " + originalPos.getRow());

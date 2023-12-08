@@ -19,9 +19,9 @@ public class DiagonalCheckersCapture implements RestrictionRule {
     @Override
     public boolean validateRule(Position pieceOriginalPos, Position pieceNewPos, Board board) {
         if(!isDiagonal(pieceOriginalPos, pieceNewPos))
-            return true; // If the movement isn't diagonal this restriction doesn't apply.
-        int rowDirection = pieceNewPos.getRow() > pieceOriginalPos.getRow() ? 1 : -1; // 1: up, 2: down
-        int colDirection = pieceNewPos.getCol() > pieceOriginalPos.getCol() ? 1 : -1; // 1: right, 2: left
+            return true;
+        int rowDirection = pieceNewPos.getRow() > pieceOriginalPos.getRow() ? 1 : -1;
+        int colDirection = pieceNewPos.getCol() > pieceOriginalPos.getCol() ? 1 : -1;
         int distance = Math.abs(pieceNewPos.getRow() - pieceOriginalPos.getRow());
 
         //rule doesn't apply cause there is no possibility of capture
@@ -30,6 +30,13 @@ public class DiagonalCheckersCapture implements RestrictionRule {
         }
 
         boolean shouldBeEmpty = false; // first near square should be occupied by a opposite color piece
+
+        // can move
+        return allPosAreValid(distance, board, pieceOriginalPos, rowDirection, colDirection);
+    }
+
+    private boolean allPosAreValid(int distance, Board board, Position pieceOriginalPos, int rowDirection, int colDirection) {
+        boolean shouldBeEmpty = false;
         for(int i = 0; i < distance; i++){
             Piece piece = board.getPiece(new Position(pieceOriginalPos.getRow() + rowDirection, pieceOriginalPos.getCol() + colDirection));
             if(!canMoveThere(pieceOriginalPos, piece, shouldBeEmpty, board)){
@@ -39,12 +46,9 @@ public class DiagonalCheckersCapture implements RestrictionRule {
             rowDirection = incrementDirection(rowDirection);
             colDirection = incrementDirection(colDirection);
         }
-
-        // can move
         return true;
     }
-
-    public int incrementDirection(int direction){
+    private int incrementDirection(int direction){
         if (direction > 0 )
             return ++direction;
         else

@@ -190,6 +190,81 @@ public class BoardTypeCreator {
         newMap.put(board.getPosByAxis(0, 3), new ArchbishopFactory().createPiece(3, Color.WHITE));
         newMap.put(board.getPosByAxis(4, 1), new ArchbishopFactory().createPiece(4, Color.BLACK));
         newMap.put(board.getPosByAxis(4, 3), new ArchbishopFactory().createPiece(5, Color.BLACK));
+        newMap.put(board.getPosByAxis(4, 4), new PawnFactory().createPiece(6, Color.BLACK));
+        newMap.put(board.getPosByAxis(0, 4), new PawnFactory().createPiece(7, Color.WHITE));
         return new Board(newMap, 5, 5);
+    }
+    public Board normalBoardWithArchbishops(){
+        Board board = new Board(10, 10);
+        PawnFactory pawnFactory = new PawnFactory();
+        Board whitePawnsRow = fillForBishops(board, pawnFactory, 1, 0, 0, Color.WHITE);
+        Board blackPawnsRow = fillForBishops(whitePawnsRow, pawnFactory, 8, 0, 10, Color.BLACK);
+        Board putKnights =putKinghtsOnSpecialBoard(blackPawnsRow, new KnightFactory(), 20);
+        Board putRooks = putRooksOnSpecialBoard(putKnights, new RookFactory(), 24);
+        Board putBishops = putBishopsOnSpecialBoard(putRooks, new BishopFactory(), 28);
+        Board putKings = putKingsOnSpecial(putBishops, new KingFactory(), 32);
+        Board putQueens = putQueenOnSpecial(putKings, new QueenFactory(), 34);
+        Board putArbishops = putArbishops(putQueens, new ArchbishopFactory(), 36);
+        return putArbishops;
+    }
+
+    private Board fillForBishops(Board board, PieceFactory pieceFactory, int row, int currentCol, int id, Color color){
+        // Check if conditions are valid
+        if (currentCol >= board.getWidth() || row >= board.getHeight() || row < 0){
+            return board;
+        }
+        Map<Position, Piece> newMap = board.getPositions();
+        newMap.put(board.getPosByAxis(row, currentCol), pieceFactory.createPiece(id, color));
+        Board newBoard = new Board(newMap, 10, 10);
+        return fillForBishops(newBoard, pieceFactory, row, ++currentCol, ++id, color);
+    }
+
+
+
+    private Board putKinghtsOnSpecialBoard(Board board, PieceFactory pieceFactory, int id){
+        Map<Position, Piece> newMap = board.getPositions();
+        newMap.put(board.getPosByAxis(0, 1), pieceFactory.createPiece(id, Color.WHITE));
+        newMap.put(board.getPosByAxis(0, 8), pieceFactory.createPiece(++id, Color.WHITE));
+        newMap.put(board.getPosByAxis(9, 8), pieceFactory.createPiece(++id, Color.BLACK));
+        newMap.put(board.getPosByAxis(9, 1), pieceFactory.createPiece(++id, Color.BLACK));
+        return new Board(newMap, 10, 10);
+    }
+    private Board putRooksOnSpecialBoard(Board board, PieceFactory pieceFactory, int id){
+        Map<Position, Piece> newMap = board.getPositions();
+        newMap.put(board.getPosByAxis(0, 0), pieceFactory.createPiece(id, Color.WHITE));
+        newMap.put(board.getPosByAxis(0, 9), pieceFactory.createPiece(++id, Color.WHITE));
+        newMap.put(board.getPosByAxis(9, 0), pieceFactory.createPiece(++id, Color.BLACK));
+        newMap.put(board.getPosByAxis(9, 9), pieceFactory.createPiece(++id, Color.BLACK));
+        return new Board(newMap, 10, 10);
+    }
+    private Board putBishopsOnSpecialBoard(Board board, PieceFactory pieceFactory, int id){
+        Map<Position, Piece> newMap = board.getPositions();
+        newMap.put(board.getPosByAxis(0, 2), pieceFactory.createPiece(id, Color.WHITE));
+        newMap.put(board.getPosByAxis(0, 7), pieceFactory.createPiece(++id, Color.WHITE));
+        newMap.put(board.getPosByAxis(9, 2), pieceFactory.createPiece(++id, Color.BLACK));
+        newMap.put(board.getPosByAxis(9, 7), pieceFactory.createPiece(++id, Color.BLACK));
+        return new Board(newMap, 10, 10);
+    }
+    private Board putKingsOnSpecial(Board board, PieceFactory pieceFactory, int id){
+        Map<Position, Piece> newMap = board.getPositions();
+        newMap.put(board.getPosByAxis(0, 5), pieceFactory.createPiece(id, Color.WHITE));
+        newMap.put(board.getPosByAxis(9, 5), pieceFactory.createPiece(++id, Color.BLACK));
+        return new Board(newMap, 10, 10);
+    }
+
+    private Board  putQueenOnSpecial(Board board, PieceFactory pieceFactory, int id){
+        Map<Position, Piece> newMap = board.getPositions();
+        newMap.put(board.getPosByAxis(0, 4), pieceFactory.createPiece(id, Color.WHITE));
+        newMap.put(board.getPosByAxis(9, 4), pieceFactory.createPiece(++id, Color.BLACK));
+        return new Board(newMap, 10, 10);
+    }
+
+    private Board putArbishops( Board board, PieceFactory pieceFactory, int id){
+        Map<Position, Piece> newMap = board.getPositions();
+        newMap.put(board.getPosByAxis(0, 3), pieceFactory.createPiece(id, Color.WHITE));
+        newMap.put(board.getPosByAxis(0, 6), pieceFactory.createPiece(++id, Color.WHITE));
+        newMap.put(board.getPosByAxis(9, 3), pieceFactory.createPiece(++id, Color.BLACK));
+        newMap.put(board.getPosByAxis(9, 6), pieceFactory.createPiece(++id, Color.BLACK));
+        return new Board(newMap, 10, 10);
     }
 }

@@ -1,4 +1,4 @@
-package example;
+package client.listeners;
 
 import edu.austral.ingsis.clientserver.ClientConnectionListener;
 

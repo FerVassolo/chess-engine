@@ -1,6 +1,3 @@
-package test;
-
-
 import chess.factories.BishopFactory;
 import chess.factories.BoardTypeCreator;
 import commons.board.Board;
@@ -110,13 +107,7 @@ public class Tests {
         assertEquals(moved, testBoard);
     }
 
-    @Test
-    public void testThereIsOnlyOneMoveToMake(){
-        Board testBoard = new BoardTypeCreator().king30to41onlyValidMove();
-        game.passTurn();
-        Board moved = new Movement().makeMove(game, testBoard, new Position(3, 0), new Position(4, 1));
-        assertNotEquals(moved, testBoard);
-    }
+
     @Test
     public void testStalemate(){
 

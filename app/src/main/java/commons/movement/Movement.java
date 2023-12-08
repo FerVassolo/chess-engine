@@ -30,7 +30,8 @@ public class Movement {
         Map<Position, Piece> newPosDisplay = new HashMap<>(board.getPositions());
         Piece movedPiece = newPosDisplay.get(board.getPosByPos(oldPos));
 
-        if (boardDependantIsValid(board, oldPos, newPos)) {
+        MovementValidator validator = new MovementValidator();
+        if (validator.boardDependantIsValid(board, oldPos, newPos)) {
             return boardDependantModifiedBoard(board, oldPos, newPos);
         }
 
@@ -44,8 +45,8 @@ public class Movement {
     public Board movePiece(Board board, Position oldPos, Position newPos, ArrayList<Board> historyOfBoards) {
         Map<Position, Piece> newPosDisplay = new HashMap<>(board.getPositions());
         Piece movedPiece = newPosDisplay.get(board.getPosByPos(oldPos));
-
-        if (boardDependantIsValid(board, oldPos, newPos)) {
+        MovementValidator validator = new MovementValidator();
+        if (validator.boardDependantIsValid(board, oldPos, newPos)) {
             return boardDependantModifiedBoard(board, oldPos, newPos);
         }
         if (hasGameModifyingRule(historyOfBoards, oldPos, newPos)){
@@ -57,16 +58,7 @@ public class Movement {
         return new Board(newPosDisplay, board.getHeight(), board.getWidth());
     }
 
-    private boolean boardDependantIsValid(Board board, Position oldPos, Position newPos) {
-        Piece movedPiece = board.getPiece(oldPos);
 
-        for (BoardDependantSpecialRule rule : movedPiece.getBoardDependantRules()) {
-            if (rule.ruleIsActive(oldPos, newPos, board)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     /**What if more than one DependantRule is active? after calling the
      board dependant rules, we overlap the boards, where a Queen has priority of a pawn, and a null from any piece.
@@ -86,33 +78,44 @@ public class Movement {
             return appendedBoards(modifiedBoards, path);
     }
 
-    private Board appendedBoards(List<Board> modifiedBoards, Position[] conflictedPath){
+    private Map<Position, Piece> updateAppendedDisplay(Board firstBoard, List<Board> modifiedBoards, Position pos, PieceName name, Map<Position, Piece> appendedDisplay, PieceComparator comparator) {
+        for (int i = 1; i < modifiedBoards.size(); i++) {
+            Board board = modifiedBoards.get(i);
+            Piece comparedPiece = board.getPiece(pos);
+            if (comparedPiece == null) {
+                appendedDisplay.put(firstBoard.getPosByPos(pos), null);
+                break;
+            }
+            PieceName comparingName = board.getPiece(pos).getName();
+            if (comparator.compare(name, comparingName) < 0) {
+                appendedDisplay.put(firstBoard.getPosByPos(pos), comparedPiece);
+                break;
+            }
+        }
+        return appendedDisplay;
+    }
+
+    private Map<Position, Piece> updateAppendedDisplayLoop(Board firstBoard, List<Board> modifiedBoards, Position[] conflictedPath) {
         PieceComparator comparator = new PieceComparator();
-        Board firstBoard = modifiedBoards.get(0);
         Map<Position, Piece> appendedDisplay = new HashMap<>(firstBoard.getPositions());
 
-        for(Position pos: conflictedPath){
+        for (Position pos : conflictedPath) {
             Piece firstPiece = firstBoard.getPiece(pos);
-            if(firstPiece == null)
+            if (firstPiece == null)
                 continue;
             PieceName name = firstBoard.getPiece(pos).getName();
 
-            for (int i = 1; i < modifiedBoards.size(); i++) {
-                Board board = modifiedBoards.get(i);
-                Piece comparedPiece = board.getPiece(pos);
-                if(comparedPiece == null){
-                    appendedDisplay.put(firstBoard.getPosByPos(pos), null);
-                    break;
-                }
-                PieceName comparingName = board.getPiece(pos).getName();
-                if(comparator.compare(name, comparingName) < 0){
-                    appendedDisplay.put(firstBoard.getPosByPos(pos), comparedPiece);
-                    break;
-                }
-            }
+            appendedDisplay = updateAppendedDisplay(firstBoard, modifiedBoards, pos, name, appendedDisplay, comparator);
         }
+        return appendedDisplay;
+    }
+
+    private Board appendedBoards(List<Board> modifiedBoards, Position[] conflictedPath) {
+        Board firstBoard = modifiedBoards.get(0);
+        Map<Position, Piece> appendedDisplay = updateAppendedDisplayLoop(firstBoard, modifiedBoards, conflictedPath);
         return new Board(appendedDisplay, firstBoard.getHeight(), firstBoard.getWidth());
     }
+
 
     private Position[] getPath(Board board, Position oldPos, Position newPos){
         Piece movedPiece = board.getPiece(oldPos);

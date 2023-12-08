@@ -21,7 +21,6 @@ public class InitConnectionListener implements ServerConnectionListener {
     }
 
     public void gameData(){
-
         Game game = gameServer.getGame();
         Board board = game.getBoard();
         List<ChessPiece> pieces = new BoardAdapter().engineBoardToUIBoard(board);

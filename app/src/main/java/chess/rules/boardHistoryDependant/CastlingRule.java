@@ -29,29 +29,28 @@ public class CastlingRule implements BoardHistoryDependantSpecialRule {
         Board currentBoard = historyOfBoards.get(historyOfBoards.size() - 1);
         Piece king = currentBoard.getPiece(pieceOriginalPos);
 
-        if(!isHorizontal(pieceOriginalPos, pieceNewPos))
-            return false;
-        if(!new CheckUtils().verifyBoardIsNotInCheck(currentBoard, king.getColor()))
-            return false;
-        if(Math.abs(pieceNewPos.getCol() - pieceOriginalPos.getCol()) != 2)
-            return false;
-        if(king.getName() != PieceName.KING)
-            return false;
+        if(!isHorizontal(pieceOriginalPos, pieceNewPos)) return false;
+        if(!new CheckUtils().verifyBoardIsNotInCheck(currentBoard, king.getColor())) return false;
+        if(Math.abs(pieceNewPos.getCol() - pieceOriginalPos.getCol()) != 2) return false;
+        if(king.getName() != PieceName.KING) return false;
+        if(!hasBeenAtTheSamePositionAllTheGame(pieceOriginalPos, historyOfBoards)) return false;
 
         int kingDirection = pieceNewPos.getCol() > pieceOriginalPos.getCol() ? 1 : -1; // 1: right, 2: left
         Position[] possiblePieces = possibleRookPosition(pieceOriginalPos, kingDirection);
 
         List<Integer> rookAtPos = typeOfPieceAtPositions(possiblePieces, PieceName.ROOK, king.getColor(), historyOfBoards);
+        return castlingIsValid(rookAtPos, pieceOriginalPos, possiblePieces, currentBoard, historyOfBoards);
+    }
+
+    private boolean castlingIsValid(List<Integer> rookAtPos, Position pieceOriginalPos, Position[] possiblePieces, Board currentBoard, ArrayList<Board> historyOfBoards){
         if (rookAtPos.isEmpty()) {
             return false;
         } else {
             for (Integer i : rookAtPos) {
                 if(!new PieceInterposesHorizontallyRestriction().validateRule(pieceOriginalPos, possiblePieces[i], currentBoard)){
-                    System.out.println("Castling not valid because interposing pos");
                     return false;
                 }
                 if (rookIsValidMove(pieceOriginalPos, possiblePieces[i], currentBoard, historyOfBoards)) {
-                    System.out.println("CASTLING IS VALID");
                     return true;
                 }
             }

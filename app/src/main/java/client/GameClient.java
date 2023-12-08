@@ -10,8 +10,7 @@ import edu.austral.ingsis.clientserver.Client;
 import edu.austral.ingsis.clientserver.ClientBuilder;
 import edu.austral.ingsis.clientserver.Message;
 import edu.austral.ingsis.clientserver.netty.client.NettyClientBuilder;
-import example.HelloPayload;
-import example.MyClientConnectionListener;
+
 
 
 import java.net.InetSocketAddress;
@@ -37,6 +36,7 @@ public class GameClient {
     public void sendMove(Move move) {
         client.send(new Message<>("movement", move));
     }
+
     public void handleMove(Message<MoveResult> message) {
         gameView.handleMoveResult(message.getPayload());
     }
@@ -53,13 +53,6 @@ public class GameClient {
         gameView.handleMoveResult(message.getPayload());
     }
 
-    public void connect() {
-        client.connect();
-    }
-
-    public void disconnect() {
-        client.closeConnection();
-    }
 
 
     public Client buildClient(){
@@ -69,8 +62,8 @@ public class GameClient {
                 // se suscribe al topico ping, cada vez que el server mande un mensaje el client lo va a recibir.
                 .addMessageListener("init-game", new TypeReference<>() {}, new InitGameListener(this))
                 .addMessageListener("new-game-state", new TypeReference<>() {}, new NewGameStateListener(this))
-                .addMessageListener("invalid-move", new TypeReference<Message<InvalidMove>>() {}, new InvalidMoveListener(this))
-                .addMessageListener("endgame", new TypeReference<Message<GameOver>>() {}, new GameOverListener(this)
+                .addMessageListener("invalid-move", new TypeReference<>() {}, new InvalidMoveListener(this))
+                .addMessageListener("endgame", new TypeReference<>() {}, new GameOverListener(this)
                 )
                 .build();
         return client;

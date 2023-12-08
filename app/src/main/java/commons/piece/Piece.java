@@ -89,6 +89,7 @@ public class Piece {
         return specialRules;
     }
 
+
     public PieceName getName() {
         return name;
     }

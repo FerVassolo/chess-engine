@@ -5,6 +5,7 @@ import commons.game.Game;
 import commons.game.Player;
 import commons.board.Position;
 import commons.piece.Piece;
+import commons.rules.boardDependantRules.BoardDependantSpecialRule;
 import commons.rules.boardHistoryDependantRules.BoardHistoryDependantSpecialRule;
 import commons.rules.movementRules.MovementRule;
 import commons.rules.restrictionRules.RestrictionRule;
@@ -17,24 +18,18 @@ public class MovementValidator {
     public boolean validateMovement(Game game, Board board, Position currentPos, Position newPos) {
         Piece piece = board.getPiece(currentPos);
 
-        if (piece == null) {
-            System.out.println("There is no piece on that position");
-            return false;
-        }
+        if (piece == null) return false;
 
         RestrictionRule[] restrictionRules = appendRestrictionRules(game.getGameRules(), piece.getRestrictionRules());
         MovementRule[] movementRules = piece.getMovementRules();
         SpecialRule[] specialRules = piece.getSpecialRules();
-        BoardHistoryDependantSpecialRule[] dependantSpecialRules = piece.getDependantSpecialRules();
+        BoardHistoryDependantSpecialRule[] histDependantSpecialRules = piece.getDependantSpecialRules();
 
-        if (!selectedPieceColorIsValid(piece, game.currentTurn()))
-            return false;
+        if (!selectedPieceColorIsValid(piece, game.currentTurn())) return false;
 
-        if(validateHistoryDependantSpecialRules(currentPos, newPos, dependantSpecialRules, game))
-            return true;
+        if(validateHistoryDependantSpecialRules(currentPos, newPos, histDependantSpecialRules, game)) return true;
 
-        if(validateSpecialRules(currentPos, newPos, specialRules, movementRules, game, board))
-            return true;
+        if(validateSpecialRules(currentPos, newPos, specialRules, movementRules, game, board)) return true;
 
         return isValid(movementRules, restrictionRules, currentPos, newPos, board);
     }
@@ -90,6 +85,17 @@ public class MovementValidator {
             return false;
         }
         return true;
+    }
+
+    public boolean boardDependantIsValid(Board board, Position oldPos, Position newPos) {
+        Piece movedPiece = board.getPiece(oldPos);
+
+        for (BoardDependantSpecialRule rule : movedPiece.getBoardDependantRules()) {
+            if (rule.ruleIsActive(oldPos, newPos, board)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public String getError() {

@@ -92,10 +92,6 @@ public class Board {
         Position pos = getPosByAxis(position.getRow(), position.getCol());
         return positions.get(pos);
     }
-    public Piece getPieceByVector(int row, int col){
-        Position pos = getPosByAxis(row, col);
-        return getPiece(pos);
-    }
 
 
 
@@ -150,6 +146,15 @@ public class Board {
         List<Piece> allPieces = board.getAllPieces();
         allPieces.removeIf(piece -> piece.getColor() != color);
         return allPieces;
+    }
+
+    public Piece getPieceById(int pieceId) {
+        for (Piece piece : getAllPieces()) {
+            if (piece.getId() == pieceId) {
+                return piece;
+            }
+        }
+        return null; // If the piece with the given ID is not found
     }
 
 }

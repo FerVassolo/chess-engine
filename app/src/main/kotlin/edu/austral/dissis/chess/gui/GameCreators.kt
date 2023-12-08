@@ -11,6 +11,7 @@ import commons.rules.endgameRules.RunOutOfPieces
 import commons.rules.restrictionRules.CannotCaptureSameColorRestriction
 import chess.rules.restrictionRules.CannotMoveIfInCheck
 import checkers.rules.restrictionRules.CheckersCanCaptureMustCaptureRule
+import chess.rules.endgameRules.FirstTeamToPromote
 import commons.rules.restrictionRules.OutOfBoundsRestriction
 import java.sql.Time
 
@@ -46,9 +47,20 @@ fun createMySpecialGame() : Game{
         CannotCaptureSameColorRestriction(),
         OutOfBoundsRestriction(),
     )
-    val endGameRules = arrayOf<EndGameRule>(RunOutOfPieces())
+    val endGameRules = arrayOf<EndGameRule>(FirstTeamToPromote())
     val players = samplePlayers()
     val board: Board = BoardTypeCreator().aKingTwoArchbishops()
+    return Game(gameRules, endGameRules, players, board, Time(0))
+}
+
+fun createNormalWithArchbishops() : Game{
+    val gameRules = arrayOf(
+        CannotCaptureSameColorRestriction(),
+        OutOfBoundsRestriction(),
+    )
+    val endGameRules = arrayOf<EndGameRule>(FirstTeamToPromote())
+    val players = samplePlayers()
+    val board: Board = BoardTypeCreator().normalBoardWithArchbishops()
     return Game(gameRules, endGameRules, players, board, Time(0))
 }
 

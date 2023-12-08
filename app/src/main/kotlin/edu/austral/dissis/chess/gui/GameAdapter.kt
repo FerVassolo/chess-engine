@@ -21,7 +21,6 @@ fun main() {
 class GameAdapter(var game : Game) : GameEngine {
 
     // Class variables
-    private var currentPlayer = WHITE
 
     private var pieces = BoardAdapter().engineBoardToUIBoard(game.board);
 
@@ -38,21 +37,13 @@ class GameAdapter(var game : Game) : GameEngine {
         val toPieceJava = BoardAdapter().kotlinPositionIntoJavaPosition(move.to)
         val currentBoard = game.lastBoard
         val result = game.move(currentBoard, fromPieceJava, toPieceJava);
-        // Though handeled in the back, kotling is causing me trouble if I dont do so
         if(fromPiece == null)
             return InvalidMove("No piece in (${move.from.row}, ${move.from.column})")
 
         when (result) {
-            is EndgameResult ->{
-                return handleGameEnd(BoardAdapter().convertColor(result.winner.color))
-            }
-            is InvalidMoveResult ->{
-                return InvalidMove(result.errorMessage)
-            }
-            is ValidMoveResult -> {
-                // could return either the newState or a GameOverMessage.
-                return makeMove(fromPiece, toPiece, move)
-            }
+            is EndgameResult ->{ return handleGameEnd(BoardAdapter().convertColor(result.winner.color)) }
+            is InvalidMoveResult ->{ return InvalidMove(result.errorMessage) }
+            is ValidMoveResult -> { return makeMove(fromPiece, toPiece, move) }
         }
         return InvalidMove("Something failed");
     }
@@ -70,7 +61,9 @@ class GameAdapter(var game : Game) : GameEngine {
         pieces = updatePieces(fromPiece, toPiece, move)
 
         pieces = BoardAdapter().engineBoardToUIBoard(game.historyOfBoards[game.historyOfBoards.size -1]);
-        return NewGameState(pieces, currentPlayer) // Current player es siempre white
+        var adapter = BoardAdapter();
+        var color = adapter.convertColor(game.currentPlayer.color)
+        return NewGameState(pieces, color)
     }
 
     private fun updatePieces(fromPiece: ChessPiece, toPiece: ChessPiece?, move: Move): List<ChessPiece> {
